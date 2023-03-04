@@ -1,0 +1,66 @@
+﻿@inherits ComponentBase
+@page "/"
+
+<PageTitle>Index</PageTitle>
+<div class="container">
+
+    <div class="row mb-2">
+        <div class="col-sm-12 col-md-4">
+            <ul class="list-group list-group-numbered">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Comments</div>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">@RedditHistory.LoadedComments.Count</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="d-grid gap-2 col-6 mx-auto">
+                @if (IsLoading)
+                {
+                    <button class="btn btn-outline-danger" @onclick="OnStopLoadClicked">Stop Loading Comments</button>
+                }
+                else
+                {
+                    <button class="btn btn-outline-primary" @onclick="OnLoadCicked">Load Comments</button>
+                }
+            </div>
+        </div>
+        <div class="col-12">
+            @foreach (var comment in RedditHistory.LoadedComments.ToList())
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@comment.Subreddit</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="card-subtitle mb-2 text-muted">@comment.Created</h6>
+                            </div>
+                            <div class="col-6 text-end">
+                                @if (comment.UpVotes > 1)
+                                {
+                                    <span class="badge bg-success rounded-pill">@comment.UpVotes</span>
+                                }
+                                else if (comment.UpVotes < 1)
+                                {
+                                    <span class="badge bg-danger rounded-pill">@comment.UpVotes</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary rounded-pill">@comment.UpVotes</span>
+                                }
+
+                            </div>
+                        </div>
+
+                        <p class="card-text">@comment.Body</p>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
