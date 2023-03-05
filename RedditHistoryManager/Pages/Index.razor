@@ -16,7 +16,7 @@
             </ul>
         </div>
     </div>
-    <div class="row">
+    <div class="row mb-2">
         <div class="col-12">
             <div class="d-grid gap-2 col-6 mx-auto">
                 @if (IsLoading)
@@ -29,38 +29,88 @@
                 }
             </div>
         </div>
-        <div class="col-12">
-            @foreach (var comment in RedditHistory.LoadedComments.ToList())
-            {
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">@comment.Subreddit</h5>
-                        <div class="row">
-                            <div class="col-6">
-                                <h6 class="card-subtitle mb-2 text-muted">@comment.Created</h6>
-                            </div>
-                            <div class="col-6 text-end">
-                                @if (comment.UpVotes > 1)
-                                {
-                                    <span class="badge bg-success rounded-pill">@comment.UpVotes</span>
-                                }
-                                else if (comment.UpVotes < 1)
-                                {
-                                    <span class="badge bg-danger rounded-pill">@comment.UpVotes</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-secondary rounded-pill">@comment.UpVotes</span>
-                                }
-
-                            </div>
-                        </div>
-
-                        <p class="card-text">@comment.Body</p>
-                    </div>
-                </div>
-
-            }
+    </div>
+    <div class="row mb-2">
+        <div class="col-3">
+            <label class="form-label">Order By</label>
+            <select class="form-select" @bind="OrderBy">
+                <option>Time</option>
+                <option>UpVotes</option>
+            </select>
+        </div>
+        <div class="col-3">
+            <label class="form-label">Subreddit</label>
+            <select class="form-select" @bind="SubReddit">
+                <option selected>All</option>
+                @foreach (var sub in KnownSubreddits)
+                {
+                    <option>@sub</option>
+                }
+            </select>
+        </div>
+        <div class="col-3">
+            <label class="form-label">Search</label>
+            <input type="text" placeholder="Search" @bind="Search" />
         </div>
     </div>
 </div>
+<div class="row mb-2">
+    <div class="col-12">
+        @foreach (var comment in GetFilteredComments())
+        {
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-9">
+                            <h5 class="card-title">
+                                <span class="text-primary">
+                                    [@comment.Subreddit]
+                                </span>
+                                <span class="text-capitalize">
+                                    <a href="@($"https://reddit.com/{comment.Permalink}")">@comment.Permalink.Split("/")[5].Replace("_"," ")</a>
+                                </span>
+
+                            </h5>
+                        </div>
+                        <div class="col-3">
+                            <div class="text-end">
+                                <button class="btn btn-outline-secondary" @onclick="()=>DeleteComment(comment)">DELETE</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h6 class="card-subtitle mb-2 text-muted">@comment.Created</h6>
+                        </div>
+                        <div class="col-6 text-end">
+                            @if (comment.UpVotes > 1)
+                            {
+                                <span class="badge bg-success rounded-pill">@comment.UpVotes</span>
+                            }
+                            else if (comment.UpVotes < 1)
+                            {
+                                <span class="badge bg-danger rounded-pill">@comment.UpVotes</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary rounded-pill">@comment.UpVotes</span>
+                            }
+
+                        </div>
+                    </div>
+
+                    <p class="card-text">@comment.Body</p>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
