@@ -1,0 +1,8 @@
+RedditHistoryManager/wwwroot/** linguist-vendored
+*.html linguist-vendored
+*.css linguist-vendored
+_Host.cshtml linguist-detectable=false
+Error.cshtml linguist-detectable=false
+MainLayout.razor linguist-detectable=false
+NavMenu.razor linguist-detectable=false
+App.razor linguist-detectable=false

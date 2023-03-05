@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using RedditHistoryManager.Data;
 using RedditHistoryManager.Services;
 
 namespace RedditHistoryManager
@@ -14,7 +13,6 @@ namespace RedditHistoryManager
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
-            builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddTransient<RedditHistoryService>();
 
             var app = builder.Build();
