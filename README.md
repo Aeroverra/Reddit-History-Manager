@@ -10,13 +10,13 @@ This is a quick project i through together in an hour to manage reddit comment h
 - 1 Click delete without confirmation
 
 
-![features](https://cdn.discordapp.com/attachments/521970463052922891/1081745781633069136/image.png)
+![features](https://github.com/user-attachments/assets/ee8e114e-6378-4509-bcfc-571b73c68699)
 
 
 #### Getting Started
 Place your reddit api keys in appsettings.json compile and run.
 
-![apiexample](https://cdn.discordapp.com/attachments/521970463052922891/1081746064958300240/image.png)
+![apiexample](https://github.com/user-attachments/assets/d77276fb-0436-48e3-ba7a-59541a87ee2a)
 
 
 #### Limitations
